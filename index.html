@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX R-1 | Ultimate Superbike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       CSS RESET & GLOBAL STYLES
+       ========================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #0a0a0c;
+      --bg-card: #141419;
+      --primary: #ff1e42;
+      --primary-hover: #e00024;
+      --accent: #ff6b00;
+      --text-light: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-heading: 'Orbitron', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ==========================================
+       NAVIGATION BAR (FIXED)
+       ========================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--text-light);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-hover);
+    }
+
+    /* ==========================================
+       HERO SECTION
+       ========================================== */
+    .hero {
+      min-height: 100vh;
+      padding: 8rem 8% 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      background: radial-gradient(circle at 70% 50%, rgba(255, 30, 66, 0.12) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      background: rgba(255, 30, 66, 0.15);
+      border: 1px solid rgba(255, 30, 66, 0.4);
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255, 30, 66, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(255, 30, 66, 0.5);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border-color);
+      color: var(--text-light);
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.7));
+    }
+
+    /* ==========================================
+       SECTION COMMON STYLES
+       ========================================== */
+    section {
+      padding: 6rem 8%;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title span {
+      color: var(--primary);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* ==========================================
+       SPECS / FEATURES SECTION
+       ========================================== */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .spec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .spec-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 30, 66, 0.4);
+    }
+
+    .spec-value {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================
+       FEATURES / HIGHLIGHTS SECTION
+       ========================================== */
+    .features-section {
+      background: #0f0f13;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .feature-box h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    footer {
+      background: #060608;
+      border-top: 1px solid var(--border-color);
+      padding: 4rem 8% 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-links h4 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-light);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ==========================================
+       RESPONSIVE DESIGN (MOBILE MEDIA QUERIES)
+       ========================================== */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 7rem;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .nav-links {
+        display: none; /* Simple dynamic responsive hiding for basic layout */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 1rem 5%;
+      }
+
+      section {
+        padding: 4rem 5%;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">APEX <span>R-1</span></div>
+    <ul class="nav-links">
+      <li><a href="#specs">Specs</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#test-ride" class="nav-cta">Book Ride</a>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Next Generation Superbike</span>
+      <h1 class="hero-title">Dominate <span>The Track</span></h1>
+      <p class="hero-subtitle">Engineering excellence meets pure aerodynamic power. The all-new APEX R-1 is built to push boundaries and ignite your adrenaline.</p>
+      <div class="hero-btns">
+        <a href="#test-ride" class="btn-primary">Book A Test Ride</a>
+        <a href="#specs" class="btn-secondary">Explore Specs</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=80" alt="Superbike APEX R-1">
+    </div>
+  </section>
+
+  <!-- SPECTIONS SECTION -->
+  <section id="specs">
+    <div class="section-header">
+      <h2 class="section-title">Raw <span>Performance</span></h2>
+      <p class="section-desc">Designed with race-grade technology to deliver top-tier performance on every corner.</p>
+    </div>
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-value">998cc</div>
+        <div class="spec-label">Inline 4 Engine</div>
+        <p class="spec-desc">Liquid-cooled DOHC engine built for maximum power delivery.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-value">210 HP</div>
+        <div class="spec-label">Peak Power</div>
+        <p class="spec-desc">Unmatched horsepower delivering instant throttle response.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-value">2.9s</div>
+        <div class="spec-label">0-100 km/h</div>
+        <p class="spec-desc">Blazing fast launch acceleration tuned for racing precision.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-value">299 km/h</div>
+        <div class="spec-label">Top Speed</div>
+        <p class="spec-desc">Electronically limited top-end speed with aero stability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="features-section">
+    <div class="section-header">
+      <h2 class="section-title">Advanced <span>Features</span></h2>
+      <p class="section-desc">Loaded with modern rider-assist technology and carbon-fiber aerodynamics.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-box">
+        <h3>Aerodynamic Winglets</h3>
+        <p>Integrated carbon winglets provide up to 18kg of downforce at high speeds for maximum front-wheel traction.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Smart Lean ABS & Traction</h3>
+        <p>6-axis IMU constantly monitors lean angles and adjusts braking and power delivery dynamically.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Quickshifter System</h3>
+        <p>Bi-directional clutchless quickshifter ensures seamless upshifts and downshifts on track or highway.</p>
+      </div>
+      <div class="feature-box">
+        <h3>TFT Smart Display</h3>
+        <p>Full-color 5-inch display with Bluetooth connectivity, turn-by-turn navigation, and telemetry logging.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo">APEX <span>R-1</span></div>
+        <p>Engineered for speed, safety, and ultimate rider thrill.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#specs">Specifications</a></li>
+          <li><a href="#features">Key Features</a></li>
+          <li><a href="#test-ride">Book Test Ride</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Contact & Support</h4>
+        <ul>
+          <li><a href="#">Showroom Locator</a></li>
+          <li><a href="#">Customer Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">Twitter / X</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 APEX Performance Motorcycles. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
